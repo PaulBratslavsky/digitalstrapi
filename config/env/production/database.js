@@ -14,7 +14,4 @@ module.exports = ({ env }) => ({
     },
     debug: false,
   },
-  app: {
-    keys: env.array('APP_KEYS'),
-  },
 });
