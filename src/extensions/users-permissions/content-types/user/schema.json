@@ -88,6 +88,12 @@
     },
     "inviteMessage": {
       "type": "text"
+    },
+    "myTeams": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::team.team",
+      "mappedBy": "teamOwner"
     }
   }
 }

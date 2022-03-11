@@ -21,9 +21,9 @@ function userSanitizedData(member) {
 
   return user;
 }
+
 // TODO: move to utils or services
 function sanitizeUserData(entity) {
-  
   if (entity.teamMembers) {
     entity.teamMembers = entity.teamMembers.map((member) => {
       return userSanitizedData(member);
@@ -38,13 +38,21 @@ function sanitizeUserData(entity) {
       });
     });
   }
+
+  if (entity.hasOwnProperty("results")) {
+    const { results } = entity;
+    results.forEach((result) => {
+      result.teamOwner = userSanitizedData(result.teamOwner);
+    });
+  }
 }
 
 module.exports = createCoreController("api::team.team", ({ strapi }) => ({
+  
   async find(ctx) {
     const entity = await strapi
       .service("api::team.team")
-      .find({ ...ctx, populate: ["teamMembers"] });
+      .find({ ...ctx, populate: ["teamMembers", "teamOwner"] });
 
     sanitizeUserData(entity);
 
@@ -58,7 +66,7 @@ module.exports = createCoreController("api::team.team", ({ strapi }) => ({
 
     const entity = await strapi
       .service("api::team.team")
-      .findOne(id, { ...query, populate: ["teamMembers"] });
+      .findOne(id, { ...query, populate: ["teamMembers", "teamOwner"] });
 
     sanitizeUserData(entity);
 
