@@ -74,15 +74,20 @@ module.exports = createCoreController("api::team.team", ({ strapi }) => ({
     sanitizeUserData(entity);
 
     const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
+
     return this.transformResponse(sanitizedEntity);
   },
 
   async create(ctx) {
     const { user } = ctx.state;
     const { data } = ctx.request.body;
+    
     const entity = await strapi.service("api::team.team").create({
       data: { ...data, teamOwner: user.id },
     });
+
+    await strapi.service("api::team.team").sendEmailInvitation(user, entity)
+
     return this.transformResponse(entity);
   },
 }));
