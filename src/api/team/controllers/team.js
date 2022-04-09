@@ -45,7 +45,6 @@ function sanitizeUserData(entity) {
     const { results } = entity;
     results.forEach((result) => {
       if (result.teamOwner) return entity;
-      console.log(result.teamOwner, "####################");
       result.teamOwner = userSanitizedData(result.teamOwner);
     });
   }
