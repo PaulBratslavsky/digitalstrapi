@@ -68,7 +68,6 @@ module.exports = (plugin) => {
     const hasFirstName = params.firstName && params.firstName.length > 0;
     const hasLastName = params.lastName && params.lastName.length > 0;
 
-    // TODO: check github issue test
     if (!hasFirstName) throw new ValidationError("Please provide a first name");
     if (!hasLastName) throw new ValidationError("Please provide a last name");
 
