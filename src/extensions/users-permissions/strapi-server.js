@@ -43,8 +43,8 @@ module.exports = (plugin) => {
       provider: "local",
     };
 
-    await validateRegisterBody(params);
-
+    // TODO: find out more what this does exactly
+    validateRegisterBody(params);
   
     // Throw an error if the password selected by the user
     // contains more than three times the symbol '$'.
@@ -65,6 +65,12 @@ module.exports = (plugin) => {
     // Check if the provided email is valid or not.
     const isEmail = emailRegExp.test(params.email);
 
+    const hasFirstName = params.firstName && params.firstName.length > 0;
+    const hasLastName = params.lastName && params.lastName.length > 0;
+
+    // TODO: check github issue test
+    if (!hasFirstName) throw new ValidationError("Please provide a first name");
+    if (!hasLastName) throw new ValidationError("Please provide a last name");
 
     if (isEmail) {
       params.email = params.email.toLowerCase();
@@ -91,9 +97,15 @@ module.exports = (plugin) => {
         params.confirmed = true;
       }
 
-      console.log(params);
+      const userData = {
+        username: params.username,
+        password: params.password,
+        email: params.email,
+        firstName: params.firstName,
+        lastName: params.lastName,
+      }
 
-      const user = await getService("user").add(params);
+      const user = await getService("user").add(userData);
 
       const sanitizedUser = await sanitizeUser(user, ctx);
 
