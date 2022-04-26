@@ -102,6 +102,8 @@ module.exports = (plugin) => {
         email: params.email,
         firstName: params.firstName,
         lastName: params.lastName,
+        role: params.role,
+        confirmed: true,
       }
 
       const user = await getService("user").add(userData);
