@@ -105,15 +105,10 @@ module.exports = (plugin) => {
         lastName: params.lastName,
         role: params.role,
         confirmed: true,
+        provider: params.provider,
       }
 
-      console.log(userData, "userData");
-
-
       const user = await getService("user").add(userData);
-
-      console.log(user, "user");
-
       const sanitizedUser = await sanitizeUser(user, ctx);
 
       if (settings.email_confirmation) {
