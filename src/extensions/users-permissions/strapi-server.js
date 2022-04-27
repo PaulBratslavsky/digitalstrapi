@@ -96,15 +96,23 @@ module.exports = (plugin) => {
         params.confirmed = true;
       }
 
+
       const userData = {
-        username: params.username,
+        username: params.email,
         password: params.password,
         email: params.email,
         firstName: params.firstName,
         lastName: params.lastName,
+        role: params.role,
+        confirmed: true,
       }
 
+      console.log(userData, "userData");
+
+
       const user = await getService("user").add(userData);
+
+      console.log(user, "user");
 
       const sanitizedUser = await sanitizeUser(user, ctx);
 
