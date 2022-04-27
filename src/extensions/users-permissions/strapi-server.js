@@ -106,6 +106,8 @@ module.exports = (plugin) => {
         confirmed: true,
       }
 
+      console.log(userData);
+
       const user = await getService("user").add(userData);
 
       const sanitizedUser = await sanitizeUser(user, ctx);
