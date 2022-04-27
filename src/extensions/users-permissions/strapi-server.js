@@ -96,16 +96,19 @@ module.exports = (plugin) => {
         params.confirmed = true;
       }
 
+
       const userData = {
-        username: params.username,
+        username: params.email,
         password: params.password,
         email: params.email,
         firstName: params.firstName,
         lastName: params.lastName,
+        role: params.role,
+        confirmed: true,
+        provider: params.provider,
       }
 
       const user = await getService("user").add(userData);
-
       const sanitizedUser = await sanitizeUser(user, ctx);
 
       if (settings.email_confirmation) {
