@@ -1,4 +1,4 @@
-p;module.exports = {
+module.exports = {
   routes: [
     {
       method: 'GET',
