@@ -51,6 +51,23 @@ function sanitizeUserData(entity) {
 }
 
 module.exports = createCoreController("api::team.team", ({ strapi }) => ({
+  async getMyTeams(ctx) {
+
+    // TODO: check if user is logged in
+    const { id } = ctx.state.user;
+
+    const entity = await strapi
+      .service("api::team.team")
+      .find({ filters: {
+        teamOwner: id
+      }, populate: ["teamMembers", "teamOwner"] });
+
+    sanitizeUserData(entity);
+    
+    const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
+    return this.transformResponse(sanitizedEntity);
+  },
+
   async find(ctx) {
     const entity = await strapi
       .service("api::team.team")
