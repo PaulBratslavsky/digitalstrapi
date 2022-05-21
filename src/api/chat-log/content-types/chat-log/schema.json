@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "chat_logs",
+  "info": {
+    "singularName": "chat-log",
+    "pluralName": "chat-logs",
+    "displayName": "Chat Log"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "textInput": {
+      "type": "string"
+    },
+    "textResponse": {
+      "type": "string"
+    }
+  }
+}
