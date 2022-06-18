@@ -106,6 +106,7 @@ module.exports = (plugin) => {
         role: params.role,
         confirmed: true,
         provider: params.provider,
+        viewStatus: "PRIVATE"
       }
 
       const user = await getService("user").add(userData);

@@ -94,6 +94,14 @@
       "relation": "oneToMany",
       "target": "api::team.team",
       "mappedBy": "teamOwner"
+    },
+    "viewStatus": {
+      "type": "enumeration",
+      "enum": [
+        "PUBLIC",
+        "PRIVATE"
+      ],
+      "default": "PRIVATE"
     }
   }
 }
