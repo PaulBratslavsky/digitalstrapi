@@ -102,6 +102,13 @@
         "PRIVATE"
       ],
       "default": "PRIVATE"
+    },
+    "userType": {
+      "type": "enumeration",
+      "enum": [
+        "RECRUITER",
+        "DEVELOPER"
+      ]
     }
   }
 }
